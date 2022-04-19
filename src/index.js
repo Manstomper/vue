@@ -1,2 +1,2 @@
 // JS
-import './shop/main.js';
+import './app/main.js';

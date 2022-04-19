@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import ShopProducts from './views/shop-products.vue';
 import ShopProduct from './views/shop-product.vue';
 import ShopCart from './views/shop-cart.vue';
@@ -10,7 +10,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 

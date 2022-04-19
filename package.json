@@ -1,5 +1,5 @@
 {
-  "name": "rig-canvas",
+  "name": "rig-vue",
   "description": "",
   "version": "1.0.0",
   "author": "RiG",
@@ -7,16 +7,18 @@
     "test": "echo \"No test specified\" && exit 1",
     "dev": "webpack --mode development --config ./src/webpack.config.dev.js --watch",
     "build": "webpack --mode production --config ./src/webpack.config.js",
-    "start": "node server.js"
+    "start": "node ./src/server.js"
   },
   "dependencies": {
+    "axios": "^0.26",
     "css-loader": "^6",
     "express": "^4",
     "html-webpack-plugin": "^5",
+    "mysql2": "^2",
     "sass-loader": "^12",
     "sass": "^1",
     "vue-loader": "^17",
-    "vue-router": "^4.0.12",
+    "vue-router": "^4",
     "vue-style-loader": "^4",
     "vue-template-compiler": "^2",
     "vue": "^3",
@@ -32,6 +34,9 @@
     "stylelint-webpack-plugin": "^3.2",
     "stylelint": "^14.3.0",
     "webpack-merge": "^5.8"
+  },
+  "browser": {
+    "crypto": false
   },
   "engines": {
     "node": "^16",
