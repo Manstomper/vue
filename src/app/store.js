@@ -1,6 +1,7 @@
+import { unref } from 'vue';
 import { createStore } from 'vuex';
 
-export const store = createStore({
+export default createStore({
   state() {
     return {
       cartContents: [],
@@ -8,11 +9,11 @@ export const store = createStore({
   },
   mutations: {
     addToCart(state, product) {
-      state.cartContents.push(product);
+      state.cartContents.push(unref(product));
     },
     removeFromCart(state, itemId) {
       state.cartContents = state.cartContents.filter((item) => {
-        return item.id !== itemId;
+        return item.id != itemId;
       });
     },
   },

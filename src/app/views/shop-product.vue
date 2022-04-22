@@ -2,38 +2,28 @@
   <template v-if="product">
     <h3>Product: {{ product.title }}</h3>
     <p>Price: {{ product.price }}</p>
-    <button type="button" :disabled="inCart" @click="addToCart">
+    <button type="button" :disabled="state.inCart" @click="addToCart()">
       Add to cart
     </button>
   </template>
   <p v-else>Product not found</p>
 </template>
 
-<script>
-import axios from 'axios';
+<script setup>
+import { reactive } from 'vue';
+import { useFetch } from './../use/fetch';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 
-export default {
-  data() {
-    return {
-      inCart: false,
-      product: null,
-    };
-  },
-  mounted() {
-    this.getProduct();
-  },
-  methods: {
-    getProduct() {
-      axios.post('/product/' + this.$route.params.id).then((response) => {
-        if (response.data) {
-          this.product = response.data;
-        }
-      });
-    },
-    addToCart() {
-      this.$store.commit('addToCart', this.product);
-      this.inCart = true;
-    },
-  },
-};
+const route = useRoute();
+const store = useStore();
+const product = useFetch('/product/' + route.params.id);
+const state = reactive({
+  inCart: store.state.cartContents.find((item) => item.id == route.params.id),
+});
+
+function addToCart() {
+  store.commit('addToCart', product);
+  state.inCart = true;
+}
 </script>
