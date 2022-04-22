@@ -1,14 +1,14 @@
 import { createApp } from 'vue';
 import { store } from './store';
 import router from './router';
-import app from './app.vue';
+import App from './app.vue';
+import ErrorAlert from './components/error-alert.vue';
 
-const shop = createApp(app)
-
-shop.config.errorHandler = (err) => {
-  console.debug(err);
+const app = createApp(App);
+app.config.errorHandler = (err) => {
+  console.error(err);
 };
-
-shop.use(router);
-shop.use(store)
-shop.mount('#app');
+app.component('ErrorAlert', ErrorAlert);
+app.use(router);
+app.use(store);
+app.mount('#app');

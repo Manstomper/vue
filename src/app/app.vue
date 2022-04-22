@@ -7,4 +7,18 @@
     </router-link>
   </nav>
   <router-view />
+  <error-alert v-if="hasError">An error has occurred.</error-alert>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      hasError: false,
+    };
+  },
+  errorCaptured() {
+    this.hasError = true;
+  },
+};
+</script>

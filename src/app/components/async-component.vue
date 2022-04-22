@@ -1,5 +1,5 @@
 <template>
-  <button type="button" @click="$emit('asyncEmit', 'You clicked.')">
+  <button type="button" @click="$emit('asyncEmit', 'Clicked.')">
     {{ asyncProp }}
   </button>
 </template>

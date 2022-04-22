@@ -24,8 +24,8 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
-import AsyncComponent from './../components/async-component.vue';
 import axios from 'axios';
+import AsyncComponent from './../components/async-component.vue';
 
 export default {
   components: {
@@ -40,6 +40,7 @@ export default {
       products: null,
       asyncPropValue: 'Not loaded.',
       showAsync: false,
+      hasError: false,
     };
   },
   mounted() {
@@ -47,11 +48,14 @@ export default {
   },
   methods: {
     getProducts() {
-      axios.post('/products').then((response) => {
-        if (response.data) {
-          this.products = response.data;
-        }
-      });
+      axios
+        .post('/products')
+        .then((response) => {
+          if (response.data) {
+            this.products = response.data;
+          }
+        })
+        .catch(() => {});
     },
   },
 };
