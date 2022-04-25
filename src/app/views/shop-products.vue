@@ -1,3 +1,9 @@
+<script setup>
+import { usePostQuery } from '../use/query';
+
+const products = usePostQuery('/products/');
+</script>
+
 <template>
   <template v-if="products">
     <h3>Products</h3>
@@ -11,9 +17,3 @@
   </template>
   <p v-else>No products found</p>
 </template>
-
-<script setup>
-import { useFetch } from './../use/fetch';
-
-const products = useFetch('/products/');
-</script>
