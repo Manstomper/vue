@@ -2,6 +2,12 @@ const path = require('path');
 const express = require('express');
 const mysql = require('mysql2/promise');
 
+async function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 async function query(qs) {
   const connection = await mysql.createConnection({
     host: 'mysql',
@@ -11,7 +17,7 @@ async function query(qs) {
   });
 
   connection.connect();
-  const [result, ] = await connection.query(qs);
+  const [result] = await connection.query(qs);
   connection.end();
 
   return result;

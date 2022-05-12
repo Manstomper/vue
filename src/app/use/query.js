@@ -2,19 +2,23 @@ import { ref, unref } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
 
-export function usePostQuery(url) {
+export function usePostQuery(url, params = null) {
   const store = useStore();
   const data = ref(null);
 
   axios
-    .post(unref(url))
+    .post(unref(url), unref(params))
     .then((response) => {
       if (response.data) {
         data.value = response.data;
       }
     })
     .catch(() => {
-      store.commit('addNotification', { key: 'axios-error', type: 'error', message: 'Failed to fetch items.'});
+      store.commit('addNotification', {
+        key: 'axios-error',
+        type: 'error',
+        message: 'Failed to fetch items.',
+      });
     });
 
   return data;
@@ -32,7 +36,11 @@ export function useGetQuery(url) {
       }
     })
     .catch(() => {
-      store.commit('addNotification', { key: 'axios-error', type: 'error', message: 'Failed to fetch items.'});
+      store.commit('addNotification', {
+        key: 'axios-error',
+        type: 'error',
+        message: 'Failed to fetch items.',
+      });
     });
 
   return data;
